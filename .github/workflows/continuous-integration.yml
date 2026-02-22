@@ -5,7 +5,7 @@ on: [push, pull_request, workflow_dispatch]
 jobs:
   test-browser:
     name: Browser tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -22,7 +22,7 @@ jobs:
         run: npm run test-ci
 
   test-node:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         node-version:
@@ -45,12 +45,12 @@ jobs:
         run: npm run test-node
 
   test-typings:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         ts-version:
-          - { ts: '4.0', types-node: '17' }
-          - { ts: 'latest', types-node: '20' }
+          - {ts: '4.0', types-node: '17'}
+          - {ts: latest, types-node: '20'}
     name: Typings tests (typescript@${{ matrix.ts-version.ts }})
     steps:
       - name: Checkout
@@ -70,7 +70,7 @@ jobs:
         run: npm run test-typings
 
   lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     name: Lint
     steps:
       - name: Checkout
